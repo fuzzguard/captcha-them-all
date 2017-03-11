@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 tags: antispam, capcha, captcha, captcha numbers, captcha plugin, captcha protection, protection, security, simple captcha, spam blocker, text captcha, web form protection, recaptcha, recapcha, simple recaptcha, recaptcha numbers, recaptcha plugin, recaptcha protection, nospam, lost password, registration, login, comment, securimage, securimage captcha, captchas.net, google recaptcha
 Requires at least: 4.7
 Tested up to: 4.7.3
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,7 +52,7 @@ This plugin also fully supports the [WooCommerce Core Plugin](https://wordpress.
 = Contact Form Protection =
 This plugin now supports the following Contact Forms:
 
-	* Contact Form 7
+        * Contact Form 7
 
 
 = Google Recatpcha Language Support =
@@ -143,6 +143,9 @@ Don't Panic!!  We can help!!  Just make a [Support Ticket](https://wordpress.org
 7. Admin Options
 
 == Changelog ==
+
+= 1.1.1 =
+* Updated admin menu options to properly run 'activate_options' function when plugin is updated.  Not just on initial activation of plugin
 
 = 1.1 =
 * Changed filter line from "add_filter( 'wp_authenticate_user', array($CTA, 'CTA_validate_captcha_login'), 10, 2 );" to "add_filter( 'authenticate', array($CTA, 'CTA_validate_captcha_login'), 10, 3 );" to validate captcha response BEFORE password and username are checked (Better Security)
