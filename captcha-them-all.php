@@ -55,7 +55,7 @@ $CTA_ipFailedAttTbl = 'CTA_ip_failed_atts';
 * Store version DB for updates
 * @since 1.1
 **/
-$CTA_DB_version = '1.1';
+$CTA_DB_version = '1.1.1';
 
 class CaptchaThemAll {
 
