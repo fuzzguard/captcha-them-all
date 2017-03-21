@@ -800,9 +800,7 @@ function custom_wpcf7_add_tagcode() {
         global $CTA_opt_name;
         $opt_name = $CTA_opt_name;
         $opt_val = get_option( $opt_name );
-        if (isset($opt_val['protected']['contact_form_7']) && $opt_val['protected']['contact_form_7'] == 'Y') {
-                wpcf7_add_shortcode( 'cta_recaptcha*', array($this, 'get_recaptcha_tagcode') ); // "clock" is the type of the form-tag
-        }
+        wpcf7_add_form_tag( 'cta_recaptcha*', array($this, 'get_recaptcha_tagcode') ); // "clock" is the type of the form-tag
 }
  
 /**
@@ -865,7 +863,7 @@ function run_db_actions() {
         if (!ISSET($opt_val) || empty($opt_val)){
                 $opt_val = array(
                         'protected' => array(
-                                'login_form' => 'N', 'register_form' => 'N', 'lostpassword_form' => 'N', 'comment_form' => 'N'
+                                'login_form' => 'N', 'login_form_attempts' => 0, 'register_form' => 'N', 'lostpassword_form' => 'N', 'comment_form' => 'N'
                         ),
                         'captcha-type' => 'built-in',
                         'google' => array
@@ -890,6 +888,10 @@ function run_db_actions() {
                         )
                 );
                 update_option($opt_name, $opt_val);
+        }
+        if (!ISSET($opt_val['protected']['login_form_attempts']) || empty($opt_val['protected']['login_form_attempts'])) {
+        		$opt_val['protected']['login_form_attempts'] = 0;
+        		update_option($opt_name, $opt_val);
         }
 }
 

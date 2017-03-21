@@ -144,6 +144,10 @@ Don't Panic!!  We can help!!  Just make a [Support Ticket](https://wordpress.org
 
 == Changelog ==
 
+= 1.1.2 =
+* Fixed issue with CF7 not displaying on '[cta_recaptcha* cta_recaptcha]' shortcode
+* Validation for CF7 is not showing correct error message.  Showing as 'failed', but not giving reason for failure
+
 = 1.1.1 =
 * Updated admin menu options to properly run 'activate_options' function when plugin is updated.  Not just on initial activation of plugin
 
