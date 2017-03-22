@@ -801,6 +801,11 @@ function custom_wpcf7_add_tagcode() {
         $opt_name = $CTA_opt_name;
         $opt_val = get_option( $opt_name );
         wpcf7_add_form_tag( 'cta_recaptcha*', array($this, 'get_recaptcha_tagcode') ); // "clock" is the type of the form-tag
+        if (is_admin()) {
+        	$tag_generator = WPCF7_TagGenerator::get_instance();
+        	$tag_generator->add( 'cta_recaptcha', __( 'CTA ReCAPTCHA', 'contact-form-7' ),
+        			array($this, 'cta_tag_generator_recaptcha'), array( 'nameless' => 1 ) );
+        }
 }
  
 /**
@@ -811,6 +816,44 @@ function get_recaptcha_tagcode( $tag ) {
     return $this->CTA_add_captcha_fields().'<span class="wpcf7-form-control-wrap cta_recaptcha"></span>';
 }
 
+/**
+ * load captcha fields for ctc_recaptcha tagcode
+ * @since 1.1.2
+ */
+function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
+	$args = wp_parse_args( $args, array() );
+
+
+	if ( 1!=1 ) {
+		?>
+<div class="control-box">
+<fieldset>
+<legend><?php echo sprintf( esc_html( __( "To use reCAPTCHA, first you need to install an API key pair. For more details, see %s.", 'contact-form-7' ) ), wpcf7_link( __( 'https://contactform7.com/recaptcha/', 'contact-form-7' ), __( 'reCAPTCHA', 'contact-form-7' ) ) ); ?></legend>
+</fieldset>
+</div>
+<?php
+
+		return;
+	}
+
+	$description = __( "Generate a form-tag for a CTA ReCAPTCHA widget. For more details, see %s.", 'contact-form-7' );
+
+
+?>
+<div class="control-box">
+<fieldset>
+<legend><?php echo esc_html( $description ); ?></legend>
+</div>
+
+<div class="insert-box">
+	<input type="text" name="cta_recaptcha* cta_recaptcha" class="tag code" readonly="readonly" onfocus="this.select()" />
+
+	<div class="submitbox">
+	<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
+	</div>
+</div>
+<?php
+}
 
 
 /**
