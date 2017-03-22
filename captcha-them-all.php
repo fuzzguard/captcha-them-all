@@ -803,7 +803,7 @@ function custom_wpcf7_add_tagcode() {
         wpcf7_add_form_tag( 'cta_recaptcha*', array($this, 'get_recaptcha_tagcode') ); // "clock" is the type of the form-tag
         if (is_admin()) {
         	$tag_generator = WPCF7_TagGenerator::get_instance();
-        	$tag_generator->add( 'cta_recaptcha', __( 'CTA ReCAPTCHA', 'contact-form-7' ),
+        	$tag_generator->add( 'cta_recaptcha', __( 'CTA ReCAPTCHA', 'captcha-them-all' ),
         			array($this, 'cta_tag_generator_recaptcha'), array( 'nameless' => 1 ) );
         }
 }
@@ -828,7 +828,7 @@ function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 		?>
 <div class="control-box">
 <fieldset>
-<legend><?php echo sprintf( esc_html( __( "To use reCAPTCHA, first you need to install an API key pair. For more details, see %s.", 'contact-form-7' ) ), wpcf7_link( __( 'https://contactform7.com/recaptcha/', 'contact-form-7' ), __( 'reCAPTCHA', 'contact-form-7' ) ) ); ?></legend>
+<legend><?php echo sprintf( esc_html( __( "To use reCAPTCHA, first you need to install an API key pair. For more details, see %s.", 'captcha-them-all' ) ), wpcf7_link( __( 'https://contactform7.com/recaptcha/', 'contact-form-7' ), __( 'reCAPTCHA', 'contact-form-7' ) ) ); ?></legend>
 </fieldset>
 </div>
 <?php
@@ -836,7 +836,7 @@ function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 		return;
 	}
 
-	$description = __( "Generate a form-tag for a CTA ReCAPTCHA widget. For more details, see %s.", 'contact-form-7' );
+	$description = __( "Generate a form-tag for a CTA ReCAPTCHA widget. For more details, see %s.", 'captcha-them-all' );
 
 
 ?>
@@ -849,7 +849,7 @@ function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 	<input type="text" name="cta_recaptcha* cta_recaptcha" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 	<div class="submitbox">
-	<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
+	<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'captcha-them-all' ) ); ?>" />
 	</div>
 </div>
 <?php
@@ -859,12 +859,12 @@ function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 /**
 * Validate the captcha response for Contact Form 7
 * @since 1.0.1
+* @updated 1.1.2
 */
 function wpcf7_confirmation_validation_filter( $result, $tag ) {
         global $CTA_opt_name;
         $opt_name = $CTA_opt_name;
         $opt_val = get_option( $opt_name );
-        if (isset($opt_val['protected']['contact_form_7']) && $opt_val['protected']['contact_form_7'] == 'Y') {
                 $tag = new WPCF7_FormTag( $tag );
 
                 $tag->name = 'cta_recaptcha';
@@ -874,8 +874,6 @@ function wpcf7_confirmation_validation_filter( $result, $tag ) {
                                 $result->invalidate( $tag, "<strong>ERROR</strong>: Captcha validation failed." );
                         }
                 }
-        }
- 
     return $result;
 }
 
@@ -951,6 +949,28 @@ function activate_options() {
                 update_option('CTA_DB_version', $CTA_DB_version);
         }
 }
+
+/**
+ *Call admin notice for Plugin Depenancies
+ * @since 1.1.2
+ */
+ function dependancy_error_notice() {
+ echo '<div class="notice notice-error">
+ <p>'.__( 'Sorry, but the plugin', 'captcha-them-all' ).' <b>Google Captcha (reCAPTCHA) by BestWebSoft</b> '.__( 'cannot be active with', 'captcha-them-all').' <b>Captcha Them All</b>.  '.__( 'Please either deactivate', 'captcha-them-all').' <b>Google Captcha (reCAPTCHA) by BestWebSoft</b> '.__( 'or', 'captcha-them-all').' <b>Captcha Them All</b>.';
+ echo '</p></div>';
+ }
+
+/**
+ * Action to call the function to check for Plugin Dependancies
+ * @since 1.1.2
+ */
+ function check_plugin_dependancies() {
+ 	// Require parent plugin
+ 	if (  is_plugin_active( 'google-captcha/google-captcha.php' ) and current_user_can( 'activate_plugins' ) ) {
+ 		add_action('admin_notices', array($this, 'dependancy_error_notice'));
+ 	}
+ }
+
 
 
 }
@@ -1045,4 +1065,10 @@ add_action('wp_login_failed', array($CTA, 'count_failed_login_attempts'));
 * @since 1.1
 */
 add_action( 'wp_login', array($CTA, 'clear_failed_login_attempts'));
+
+/**
+ * Action to call the function to check for Plugin Dependancies
+ * @since 1.1.2
+ */
+add_action( 'admin_init', array($CTA, 'check_plugin_dependancies'));
 ?>
