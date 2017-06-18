@@ -3,7 +3,7 @@
  * Plugin Name: Captcha Them All
  * Plugin URI: http://www.fuzzguard.com.au/plugins/captcha-them-all
  * Description: Provides Captcha display on login, registration, lost password and commenting pages in WordPress (Also works for WooCommerce)
- * Version: 1.1.1
+ * Version: 1.2
  * Author: <a href="http://www.fuzzguard.com.au/"><strong>Benjamin Guy</strong></a>
  * Author URI: http://www.fuzzguard.com.au
  * Text Domain: captcha-them-all
@@ -254,6 +254,7 @@ function CTA_add_captcha_lostpassword_fields() {
         global $CTA_opt_name;
         $opt_name = $CTA_opt_name;
         $opt_val = get_option( $opt_name );
+		
         if (isset($opt_val['protected']['lostpassword_form']) && $opt_val['protected']['lostpassword_form'] == 'Y') {
                 echo $this->CTA_add_captcha_fields();
         }
@@ -605,7 +606,7 @@ function captcha_wordpress_options() {
                                 <tr>
                                         <th scope="row"><label for="page_handler"><?php _e('Protect these areas', 'captcha-them-all' ); ?></label></th>
                                         <td>
-                                                <fieldset><legend class="screen-reader-text"><span><?php _e('Protect Login Form', 'captcha-them-all' ); ?></span></legend>
+                                                <fieldset><legend class="screen-reader-text"><span><?php _e('Protect Login Form', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                 <input type="checkbox" id="protectedLoginForm" name="<?php echo $data_field_name; ?>[protected][login_form]" value="Y" <?php checked($opt_val['protected']['login_form'],  'Y'); ?>> Login Form 
                                                 <p class="description" id="discover-description"><?php _e('Display Captcha protection on Login Form', 'captcha-them-all' ); ?></p>
                                                 <br>
@@ -642,7 +643,7 @@ function captcha_wordpress_options() {
                                 <tr>
                                         <th scope="row"><label for="page_handler"><?php _e('Type of Captcha', 'captcha-them-all' ); ?></label></th>
                                         <td>
-                                                <fieldset><legend class="screen-reader-text"><span><?php _e('Type of Captcha', 'captcha-them-all' ); ?></span></legend>
+                                                <fieldset><legend class="screen-reader-text"><span><?php _e('Type of Captcha', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                 <select id="captchaType" name="<?php echo $data_field_name; ?>[captcha-type]" required>
                                                         <option value="google-recaptcha" <?php selected( $opt_val['captcha-type'], 'google-recaptcha' ); ?>>Google Recaptcha</option>
                                                         <option value="built-in" <?php selected( $opt_val['captcha-type'], 'built-in' ); ?>>Secure Image (Built-In Captcha)</option>
@@ -660,7 +661,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Google Recaptcha site key', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha site key', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha site key', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="textbox" name="<?php echo $data_field_name; ?>[google][grecaptcha-sitekey]" id="grecaptcha-sitekey" value="<?php echo $opt_val['google']['grecaptcha-sitekey']; ?>" size="55">
                                                         <p class="description" id="discover-description"><?php _e('Getting Started', 'captcha-them-all' ); ?>: <a href="https://developers.google.com/recaptcha/docs/start" target="_BLANK">https://developers.google.com/recaptcha/docs/start</a>
                                                         <br>
@@ -670,7 +671,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Google Recaptcha secret key', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha secret key', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha secret key', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="textbox" name="<?php echo $data_field_name; ?>[google][grecaptcha-secret]" id="grecaptcha-secret" value="<?php echo $opt_val['google']['grecaptcha-secret']; ?>" size="55">
                                                         <p class="description" id="discover-description"><?php _e('Getting Started', 'captcha-them-all' ); ?>: <a href="https://developers.google.com/recaptcha/docs/start" target="_BLANK">https://developers.google.com/recaptcha/docs/start</a>
                                                         <br>
@@ -680,7 +681,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Google Recaptcha Theme', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha Theme', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha Theme', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                 <select id="grecaptcha-theme" name="<?php echo $data_field_name; ?>[google][grecaptcha-theme]" required>
                                                         <option value="light" <?php selected( $opt_val['google']['grecaptcha-theme'], 'light' ); ?>>Light Theme</option>
                                                         <option value="dark" <?php selected( $opt_val['google']['grecaptcha-theme'], 'dark' ); ?>>Dark Theme</option>
@@ -692,7 +693,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Google Recaptcha Type', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha Type', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Google Recaptcha Type', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                 <select id="grecaptcha-theme" name="<?php echo $data_field_name; ?>[google][grecaptcha-type]" required>
                                                         <option value="image" <?php selected( $opt_val['google']['grecaptcha-type'], 'image' ); ?>>Image</option>
                                                         <option value="audio" <?php selected( $opt_val['google']['grecaptcha-type'], 'audio' ); ?>>Audio</option>
@@ -711,7 +712,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Signature', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Signature', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Signature', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="textbox" name="<?php echo $data_field_name; ?>[securImage][signature]" id="captchasNet-username" value="<?php echo $opt_val['securImage']['signature']; ?>" size="55">
                                                         <p class="description" id="discover-description"><?php _e('Add a signature to your captcha image', 'captcha-them-all' ); ?>:</p>
                                                 </td>
@@ -719,7 +720,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Text Captcha or Math Problem', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Text Captcha or Math Problem', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Text Captcha or Math Problem', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                 <select id="mathOrText" name="<?php echo $data_field_name; ?>[securImage][mathOrText]" required>
                                                         <option value="text" <?php selected( $opt_val['securImage']['mathOrText'], 'text' ); ?>>Text</option>
                                                         <option value="math" <?php selected( $opt_val['securImage']['mathOrText'], 'math' ); ?>>Math</option>
@@ -730,7 +731,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Signature Colour', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Signature', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Signature', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="text" value="<?php echo $opt_val['securImage']['signatureColour']; ?>" name="<?php echo $data_field_name; ?>[securImage][signatureColour]" class="my-color-picker" data-default-color="#000000" />
                                                         <p class="description" id="discover-description"><?php _e('Colour signature in Captcha (NOTE: Be careful as some colours may bleed into the background)', 'captcha-them-all' ); ?>:</p>
                                                 </td>
@@ -738,7 +739,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Distortion', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Distortion', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Distortion', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         Lowest(0)<input type="range" min="0" max="10" step="1" value="<?php echo $opt_val['securImage']['distortion']; ?>" name="<?php echo $data_field_name; ?>[securImage][distortion]" onchange="rangevalue.value=value" />Highest(10)
                                                         <br><output style="margin-left: 13.5%;" id="rangevalue"><?php echo $opt_val['securImage']['distortion']; ?></output>
                                                         <p class="description" id="discover-description"><?php _e('Amount of distortion in Captcha Image (0 lowest, 10 highest)', 'captcha-them-all' ); ?>:</p>
@@ -754,7 +755,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Captchas.Net username', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Captchas.Net username', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Captchas.Net username', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="textbox" name="<?php echo $data_field_name; ?>[captchasNet][username]" id="captchasNet-username" value="<?php echo $opt_val['captchasNet']['username']; ?>" size="55">
                                                         <p class="description" id="discover-description"><?php _e('Getting Started', 'captcha-them-all' ); ?>: <a href="http://captchas.net/" target="_BLANK">http://captchas.net/</a>
                                                         <br>
@@ -764,7 +765,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Captchas.Net secret key', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Captchas.Net secret key', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Captchas.Net secret key', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="textbox" name="<?php echo $data_field_name; ?>[captchasNet][secret]" id="grecaptcha-secret" value="<?php echo $opt_val['captchasNet']['secret']; ?>" size="55">
                                                         <p class="description" id="discover-description"><?php _e('Getting Started', 'captcha-them-all' ); ?>: <a href="http://captchas.net/" target="_BLANK">http://captchas.net/</a>
                                                         <br>
@@ -774,7 +775,7 @@ function captcha_wordpress_options() {
                                         <tr>
                                                 <th scope="row"><label for="page_handler"><?php _e('Colour', 'captcha-them-all' ); ?></label></th>
                                                 <td>
-                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Colour', 'captcha-them-all' ); ?></span></legend>
+                                                        <fieldset><legend class="screen-reader-text"><span><?php _e('Colour', 'captcha-them-all' ); ?></span></legend></fieldset>
                                                         <input type="text" value="<?php echo $opt_val['captchasNet']['colour']; ?>" name="<?php echo $data_field_name; ?>[captchasNet][colour]" class="my-color-picker" data-default-color="#000000" />
                                                         <p class="description" id="discover-description"><?php _e('Colour of the captcha (NOTE: Make sure this is a colour your users can see on your site)', 'captcha-them-all' ); ?></p>
                                                 </td>
@@ -818,7 +819,7 @@ function get_recaptcha_tagcode( $tag ) {
 
 /**
  * load captcha fields for ctc_recaptcha tagcode
- * @since 1.1.2
+ * @since 1.2
  */
 function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 	$args = wp_parse_args( $args, array() );
@@ -841,8 +842,9 @@ function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 
 ?>
 <div class="control-box">
-<fieldset>
-<legend><?php echo esc_html( $description ); ?></legend>
+	<fieldset>
+		<legend><?php echo esc_html( $description ); ?></legend>
+	</fieldset>
 </div>
 
 <div class="insert-box">
@@ -859,7 +861,7 @@ function cta_tag_generator_recaptcha( $contact_form, $args = '' ) {
 /**
 * Validate the captcha response for Contact Form 7
 * @since 1.0.1
-* @updated 1.1.2
+* @updated 1.2
 */
 function wpcf7_confirmation_validation_filter( $result, $tag ) {
         global $CTA_opt_name;
@@ -871,7 +873,7 @@ function wpcf7_confirmation_validation_filter( $result, $tag ) {
                 if ( 'cta_recaptcha' == $tag->name ) {
                         $response = $this->validateCaptchaResponse($opt_val);
                         if (!$response) {
-                                $result->invalidate( $tag, "<strong>ERROR</strong>: Captcha validation failed." );
+                                $result->invalidate( $tag, "Captcha validation failed." );
                         }
                 }
     return $result;
@@ -952,9 +954,9 @@ function activate_options() {
 
 /**
  *Call admin notice for Plugin Depenancies
- * @since 1.1.2
+ * @since 1.2
  */
- function dependancy_error_notice() {
+function GC_dependancy_error_notice() {
  echo '<div class="notice notice-error">
  <p>'.__( 'Sorry, but the plugin', 'captcha-them-all' ).' <b>Google Captcha (reCAPTCHA) by BestWebSoft</b> '.__( 'cannot be active with', 'captcha-them-all').' <b>Captcha Them All</b>.  '.__( 'Please either deactivate', 'captcha-them-all').' <b>Google Captcha (reCAPTCHA) by BestWebSoft</b> '.__( 'or', 'captcha-them-all').' <b>Captcha Them All</b>.';
  echo '</p></div>';
@@ -962,16 +964,14 @@ function activate_options() {
 
 /**
  * Action to call the function to check for Plugin Dependancies
- * @since 1.1.2
+ * @since 1.2
  */
  function check_plugin_dependancies() {
  	// Require parent plugin
  	if (  is_plugin_active( 'google-captcha/google-captcha.php' ) and current_user_can( 'activate_plugins' ) ) {
- 		add_action('admin_notices', array($this, 'dependancy_error_notice'));
+ 		add_action('admin_notices', array($this, 'GC_dependancy_error_notice'));
  	}
  }
-
-
 
 }
 
@@ -987,9 +987,10 @@ $CTA = new CaptchaThemAll();
 */
 add_action( 'login_form', array($CTA, 'CTA_add_captcha_login_fields') ); //Works for WP Core
 add_action( 'woocommerce_login_form', array($CTA, 'CTA_add_captcha_login_fields') ); //Works for WooCommerce Core
-add_action( 'register_form', array($CTA, 'CTA_add_captcha_register_fields') ); //Works for WP Core and WooCommerce Core
+add_action( 'register_form', array($CTA, 'CTA_add_captcha_register_fields') ); //Works for WP Core
+add_action( 'woocommerce_register_form', array($CTA, 'CTA_add_captcha_register_fields') ); //Works for WooCommerce Core
 add_action( 'lostpassword_form', array($CTA, 'CTA_add_captcha_lostpassword_fields') ); //Works for WP Core
-add_action( 'woocommerce_lostpassword_form', array($CTA, 'CTA_add_captcha_lostpassword_fields') ); //Works for WooCommerce Core
+add_action( 'woocommerce_lostpassword_form', array($CTA, 'CTA_add_captcha_lostpassword_fields'), 10, 0 ); //Works for WooCommerce Core
 add_action( 'comment_form_after_fields', array($CTA, 'CTA_add_captcha_comment_fields') );
 
 /**
@@ -1023,10 +1024,10 @@ add_filter( 'woocommerce_registration_errors', array($CTA, 'CTA_validate_captcha
 /**
 * Action to call the function to validate captcha response for LOST PASSWORD
 * @since 0.1
-* @updated 1.1
+* @updated 1.2
 */
-add_filter( 'allow_password_reset', array($CTA, 'CTA_validate_captcha_lostpassword'), 10, 2 );
-//add_action( 'lostpassword_post', array($CTA, 'CTA_validate_captcha_lostpassword')); # For future development.
+//add_filter( 'allow_password_reset', array($CTA, 'CTA_validate_captcha_lostpassword'), 10, 2 ); // Depreciated
+add_action( 'lostpassword_post', array($CTA, 'CTA_validate_captcha_lostpassword'), 10, 1);
 
 /**
 * Filter to run the function to validate captcha response for COMMENT

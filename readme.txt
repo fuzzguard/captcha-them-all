@@ -3,8 +3,8 @@ Contributors: fuzzguard
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=G8SPGAVH8RTBU
 tags: antispam, capcha, captcha, captcha numbers, captcha plugin, captcha protection, protection, security, simple captcha, spam blocker, text captcha, web form protection, recaptcha, recapcha, simple recaptcha, recaptcha numbers, recaptcha plugin, recaptcha protection, nospam, lost password, registration, login, comment, securimage, securimage captcha, captchas.net, google recaptcha
 Requires at least: 4.7
-Tested up to: 4.7.3
-Stable tag: 1.1.1
+Tested up to: 4.8
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,10 +144,13 @@ Don't Panic!!  We can help!!  Just make a [Support Ticket](https://wordpress.org
 
 == Changelog ==
 
-= 1.1.2 =
+= 1.2 =
 * Fixed issue with CF7 not displaying on '[cta_recaptcha* cta_recaptcha]' shortcode
-* Fixed validation for captcha code when Contact Form 7 is displayed
-* Added code to check for 'Google Captcha (reCAPTCHA) by BestWebSoft' plugin and give warning notice as plugins can conflict. 
+* Fixed validation for captcha code when Contact Form 7 is displayed.
+* Fixed response codes for Contact Form 7 responses - Removed HTML tags
+* Changed WooCommerce Hook 'allow_password_reset' to 'lostpassword_post' as WooCommerce added my suggestion to respect same format for 'lostpassword_post' as WP Core does. (https://github.com/woocommerce/woocommerce/pull/13558)
+* Split WooCommerce registration form hook to 'woocommerce_register_form' instead of 'register_form' as this conforms more correctly to WooCommerce Documentation.
+* Added code to check for 'Google Captcha (reCAPTCHA) by BestWebSoft' plugin and give warning notice as plugins can conflict.
 
 = 1.1.1 =
 * Updated admin menu options to properly run 'activate_options' function when plugin is updated.  Not just on initial activation of plugin
