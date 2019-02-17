@@ -3,8 +3,8 @@ Contributors: fuzzguard
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=G8SPGAVH8RTBU
 tags: antispam, capcha, captcha, captcha numbers, captcha plugin, captcha protection, protection, security, simple captcha, spam blocker, text captcha, web form protection, recaptcha, recapcha, simple recaptcha, recaptcha numbers, recaptcha plugin, recaptcha protection, nospam, lost password, registration, login, comment, securimage, securimage captcha, captchas.net, google recaptcha
 Requires at least: 4.7
-Tested up to: 4.8
-Stable tag: 1.3.2
+Tested up to: 5.0.3
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

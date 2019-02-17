@@ -3,12 +3,12 @@
  * Plugin Name: Captcha Them All
  * Plugin URI: http://www.fuzzguard.com.au/plugins/captcha-them-all
  * Description: Provides Captcha display on login, registration, lost password and commenting pages in WordPress (Also works for WooCommerce)
- * Version: 1.3.2
+ * Version: 1.3.3
  * Author: <a href="http://www.fuzzguard.com.au/"><strong>Benjamin Guy</strong></a>
  * Author URI: http://www.fuzzguard.com.au
  * Text Domain: captcha-them-all
  * WC requires at least: 3.0.0
- * WC tested up to: 3.3.5
+ * WC tested up to: 3.5.4
  * License: GPL2
 
     Copyright 2017  Benjamin Guy  (email: support@fuzzguard.com.au)
