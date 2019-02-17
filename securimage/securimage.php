@@ -2111,7 +2111,7 @@ class Securimage
         $textlen = $bbox[2] - $bbox[0];
         $x = $this->image_width - $textlen - 5;
         $y = $this->image_height - 3;
-
+	file_put_contents('/tmp/secureImage', $this->signature_font);
         imagettftext($this->im, 10, 0, $x, $y, $this->gdsignaturecolor, $this->signature_font, $this->image_signature);
     }
 
@@ -3402,18 +3402,16 @@ class Securimage_Color
             }
 
             if (strlen($color) != 3 && strlen($color) != 6) {
-                throw new InvalidArgumentException(
-                  'Invalid HTML color code passed to Securimage_Color'
-                );
+		print 'Invalid HTML color code passed to Securimage_Color';
+		die();
             }
 
             $this->constructHTML($color);
         } else if (sizeof($args) == 3) {
             $this->constructRGB($args[0], $args[1], $args[2]);
         } else {
-            throw new InvalidArgumentException(
-              'Securimage_Color constructor expects 0, 1 or 3 arguments; ' . sizeof($args) . ' given'
-            );
+	    print 'Securimage_Color constructor expects 0, 1 or 3 arguments; ' . sizeof($args) . ' given';
+	    die();
         }
     }
 

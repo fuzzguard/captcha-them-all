@@ -10,22 +10,23 @@ if ( ! function_exists( 'is_admin' ) ) {
     exit();
 }
 
+require(dirname(__FILE__).'/captcha-them-all.php');
+
 //if uninstall not called from WordPress exit
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) 
     exit();
-/**
-$allOptions = wp_load_alloptions();
-foreach ($allOptions as $option_name => $option_value) {
-	if (strpos($option_name, 'captcha-them-all') !== FALSE) {
-		delete_option( $option_name );
-	}
-}
 
-**/
+$CTA = new CaptchaThemAll();
 
-delete_option( 'captcha-them-all' );
+delete_option( $CTA->$CTA_opt_name );
 
 // For site options in multisite
-delete_site_option( 'captcha-them-all'  );  
+delete_site_option( $CTA->$CTA_opt_name  );  
+
+global $wpdb;
+$table = $wpdb->prefix.$CTA->CTA_ipFailedAttTbl;
+if($wpdb->get_var("SHOW TABLES LIKE '$table'") == $table ){
+	$wpdb->query( "DROP TABLE IF EXISTS `$table`");
+}
 
 ?>
